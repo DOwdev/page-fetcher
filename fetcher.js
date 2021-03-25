@@ -10,7 +10,6 @@ const rl = readline.createInterface({
 const args = process.argv.slice(2);
 
 const saveBody = (args) => {
-    let bodyHTML;
     request(args[0], (error, response, body) => {
         if(error){
             console.log('Failed to download reosurce: ', error);
@@ -22,7 +21,7 @@ const saveBody = (args) => {
         if(answer === 'y' || answer === 'Y'){
             fs.writeFile(`${args[1]}`, `${body}`, (err)=>{
                 if(err) { 
-                    console.log("there was an error");
+                    console.log("there was an error. Cannot find path", err);
                     rl.close();
                 } else{
                 console.log(`Downloaded and saved ${body.length} bytes to ${args[1]}`);
